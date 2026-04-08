@@ -1,0 +1,119 @@
+/* ── Wrapper ── */
+.ht-wrap {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 14px;
+  padding: 40px 24px 36px;
+  animation: htIn .9s cubic-bezier(.22,1,.36,1) .1s both;
+}
+@keyframes htIn {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Animated side lines ── */
+.ht-line {
+  position: absolute; top: 50%; height: 1px; width: 0;
+  background: linear-gradient(to right, transparent, rgba(168,85,247,.45), transparent);
+  animation: lineGrow 1.2s cubic-bezier(.22,1,.36,1) .4s forwards;
+}
+.ht-line--left  { right: 50%; margin-right: 180px; transform-origin: right; }
+.ht-line--right { left:  50%; margin-left:  180px; transform-origin: left;  }
+@keyframes lineGrow { to { width: 110px; } }
+
+/* ── Top row ── */
+.ht-body {
+  display: flex; align-items: center; gap: 10px;
+  position: relative; z-index: 1;
+}
+.ht-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent2); box-shadow: 0 0 8px var(--accent2);
+  animation: dotBlink 2.2s ease-in-out infinite;
+}
+@keyframes dotBlink { 0%,100%{opacity:1} 50%{opacity:.2} }
+.ht-name {
+  font-size: .72rem; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--accent2);
+}
+.ht-sep { color: rgba(255,255,255,.2); font-size: .8rem; }
+.ht-role {
+  font-size: .72rem; font-weight: 400;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+}
+
+/* ── Headline wrapper — clips the SVG trail ── */
+.ht-headline-wrap {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+/* ── SVG light-trail ── */
+.ht-trail {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 2;
+  overflow: visible;
+}
+
+.ht-trail-line {
+  /* Start off-screen left, sweep to off-screen right */
+  animation: trailSweep 3.8s cubic-bezier(.4,0,.2,1) infinite;
+  animation-delay: 1.4s; /* wait for chars to finish animating in */
+}
+
+@keyframes trailSweep {
+  0% {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(240%);
+    opacity: 0;
+  }
+}
+
+/* ── Headline ── */
+.ht-headline {
+  position: relative; z-index: 1;
+  font-size: clamp(1.5rem, 3.8vw, 2.6rem);
+  font-weight: 800; letter-spacing: -.02em; line-height: 1.15;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  text-align: center;
+  filter: drop-shadow(0 0 20px rgba(168,85,247,.4));
+}
+
+.ht-line-block {
+  display: flex; flex-wrap: wrap; justify-content: center;
+}
+
+/* Line 1 — white */
+.ht-line-block .ht-char {
+  background: linear-gradient(135deg, #fff 40%, #e2d9f3 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+/* Line 2 — purple accent */
+.ht-line-block--accent .ht-char {
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 45%, #818cf8 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.ht-char {
+  display: inline-block;
+  opacity: 0; transform: translateY(12px);
+  animation: charIn .5s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes charIn { to { opacity: 1; transform: translateY(0); } }
+
+/* ── Mobile ── */
+@media (max-width: 540px) {
+  .ht-line { display: none; }
+  .ht-wrap { padding: 28px 16px 24px; gap: 10px; }
+}

@@ -1,0 +1,122 @@
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; padding: 0 24px;
+}
+
+/* ── Animated gradient bg ── */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 75% 55% at 18% 38%, rgba(109,40,217,.3) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 45% at 82% 68%, rgba(59,130,246,.22) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 35% at 52% 8%,  rgba(168,85,247,.16) 0%, transparent 50%),
+    linear-gradient(155deg, #07070f 0%, #0c0820 55%, #07070f 100%);
+  background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+  animation: bgShift 14s ease-in-out infinite alternate;
+}
+@keyframes bgShift {
+  0%   { background-position: 0% 0%,   100% 100%, 50% 0%,   0% 0%; }
+  50%  { background-position: 40% 60%,  60%  30%, 80% 50%,  0% 0%; }
+  100% { background-position: 100% 40%, 0%   70%, 30% 90%,  0% 0%; }
+}
+
+/* ── Noise ── */
+.hero-noise {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  background-size: 180px; opacity: .45;
+}
+
+/* ── Orbs ── */
+.hero-orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(88px); z-index: 2; }
+.orb-a { width: 580px; height: 580px; background: radial-gradient(circle, rgba(109,40,217,.38), transparent 70%); top: -200px; left: -160px; animation: orbA 16s ease-in-out infinite alternate; }
+.orb-b { width: 460px; height: 460px; background: radial-gradient(circle, rgba(59,130,246,.26), transparent 70%); bottom: -130px; right: -110px; animation: orbB 20s ease-in-out infinite alternate; }
+.orb-c { width: 300px; height: 300px; background: radial-gradient(circle, rgba(168,85,247,.2), transparent 70%); top: 45%; left: 58%; animation: orbC 13s ease-in-out infinite alternate; }
+@keyframes orbA { from{transform:translate(0,0) scale(1)}   to{transform:translate(55px,38px) scale(1.1)} }
+@keyframes orbB { from{transform:translate(0,0) scale(1)}   to{transform:translate(-45px,-32px) scale(1.08)} }
+@keyframes orbC { from{transform:translate(0,0) scale(1)}   to{transform:translate(-35px,45px) scale(1.14)} }
+
+/* ── Grid lines ── */
+.hero-grid {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%);
+}
+
+/* ── Body ── */
+.hero-body {
+  position: relative; z-index: 3;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 20px; max-width: 860px;
+  animation: heroIn .9s cubic-bezier(.22,1,.36,1) .15s both;
+}
+@keyframes heroIn { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+.hero-tag {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .7rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--accent2); font-weight: 500;
+}
+.hero-pulse {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent2); box-shadow: 0 0 10px var(--accent2);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.8)} }
+
+.hero-h1 {
+  font-size: clamp(2.6rem, 6.8vw, 5.6rem);
+  font-weight: 800; line-height: 1.06; letter-spacing: -.035em;
+}
+.hero-h1 em {
+  font-style: italic; font-weight: 300;
+  background: linear-gradient(90deg, var(--accent2), #c084fc, #60a5fa);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 30px rgba(168,85,247,.55));
+}
+
+.hero-sub { font-size: clamp(.8rem, 1.4vw, .95rem); color: var(--muted); font-weight: 300; letter-spacing: .04em; }
+
+/* ── Buttons ── */
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 6px; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; padding: 13px 28px; border-radius: 50px;
+  font-size: .82rem; font-weight: 600; letter-spacing: .04em;
+  box-shadow: 0 0 28px var(--glow);
+  transition: transform .25s, box-shadow .3s;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 52px rgba(168,85,247,.8); }
+.btn-ghost {
+  display: inline-flex; align-items: center;
+  border: 1px solid rgba(255,255,255,.18); color: var(--text);
+  padding: 13px 28px; border-radius: 50px;
+  font-size: .82rem; font-weight: 500;
+  transition: border-color .3s, background .3s, transform .25s;
+}
+.btn-ghost:hover { border-color: var(--accent2); background: rgba(168,85,247,.1); transform: translateY(-2px); }
+
+/* ── Stats ── */
+.hero-stats {
+  display: flex; gap: 40px; margin-top: 12px;
+  padding-top: 24px; border-top: 1px solid var(--border);
+}
+.hero-stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.hero-stat-n { font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, var(--accent2), #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-stat-l { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+
+/* ── Scroll cue ── */
+.hero-scroll-cue {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 7px;
+  animation: scrollBounce 2.4s ease-in-out infinite;
+}
+.hero-scroll-line { width: 1px; height: 44px; background: linear-gradient(to bottom, transparent, var(--accent2)); }
+.hero-scroll-cue span { font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+@keyframes scrollBounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }

@@ -1,0 +1,35 @@
+.loader {
+  position: fixed; inset: 0;
+  background: #080810;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+  animation: loaderFade 0.5s ease 2.2s forwards;
+}
+@keyframes loaderFade { to { opacity: 0; pointer-events: none; } }
+
+.loader-inner { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+
+.loader-text {
+  font-size: 1.6rem; font-weight: 800; letter-spacing: 0.3em;
+  background: linear-gradient(90deg, #7c3aed, #a855f7, #7c3aed);
+  background-size: 200%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer { 0%{background-position:0%} 100%{background-position:200%} }
+
+.loader-sub { font-size: 0.75rem; color: #8888aa; letter-spacing: 0.15em; }
+
+.loader-bar {
+  width: 240px; height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px; overflow: hidden;
+}
+.loader-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  border-radius: 2px;
+  animation: fill 2s ease forwards;
+  box-shadow: 0 0 12px #7c3aed;
+}
+@keyframes fill { from { width: 0% } to { width: 100% } }

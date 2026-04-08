@@ -1,0 +1,79 @@
+.wa-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+
+  background: #25d366;
+  box-shadow:
+    0 4px 24px rgba(37,211,102,.5),
+    0 0 0 3px rgba(37,211,102,.15);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+  animation: waPop .7s cubic-bezier(.34,1.56,.64,1) .8s both;
+  text-decoration: none;
+}
+.wa-btn:hover {
+  transform: scale(1.14) translateY(-3px);
+  box-shadow:
+    0 8px 36px rgba(37,211,102,.65),
+    0 0 0 4px rgba(37,211,102,.2);
+}
+@keyframes waPop {
+  from { opacity: 0; transform: scale(.4) translateY(20px); }
+  to   { opacity: 1; transform: scale(1)  translateY(0); }
+}
+
+/* Pulse ring */
+.wa-btn::before {
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(37,211,102,.35);
+  animation: waPulse 2.4s ease-out infinite;
+}
+@keyframes waPulse {
+  0%   { transform: scale(1);   opacity: .7; }
+  100% { transform: scale(1.5); opacity: 0;  }
+}
+
+.wa-icon { width: 30px; height: 30px; flex-shrink: 0; }
+
+/* Tooltip */
+.wa-tooltip {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  background: rgba(13,13,26,.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.09);
+  color: rgba(255,255,255,.88);
+  font-family: 'Poppins', sans-serif;
+  font-size: .72rem; font-weight: 500;
+  letter-spacing: .03em;
+  white-space: nowrap;
+  padding: 7px 13px;
+  border-radius: 9px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .22s ease, transform .22s ease;
+}
+.wa-btn:hover .wa-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 600px) {
+  .wa-btn { bottom: 18px; right: 18px; width: 52px; height: 52px; }
+  .wa-icon { width: 26px; height: 26px; }
+  .wa-tooltip { display: none; }
+}

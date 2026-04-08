@@ -1,0 +1,9 @@
+.foot { border-top: 1px solid var(--border); padding: 26px 40px; background: var(--bg); }
+.foot-inner { max-width: 1060px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.foot-logo { font-size: 1.1rem; font-weight: 800; color: rgba(255,255,255,.35); }
+.foot-logo span { color: var(--accent2); }
+.foot-copy { font-size: .68rem; color: rgba(255,255,255,.14); letter-spacing: .04em; }
+.foot-links { display: flex; gap: 20px; }
+.foot-links a { font-size: .7rem; color: rgba(255,255,255,.22); text-transform: uppercase; letter-spacing: .08em; font-weight: 500; transition: color .25s; }
+.foot-links a:hover { color: var(--accent2); }
+@media (max-width: 600px) { .foot { padding: 22px 20px; } .foot-inner { flex-direction: column; text-align: center; } }

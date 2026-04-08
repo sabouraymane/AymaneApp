@@ -1,0 +1,103 @@
+/* ── Page ── */
+.port {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 48px 40px 64px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Grid — 3 columns desktop ── */
+.port-grid {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+/* ── Card ── */
+.card {
+  opacity: 0;
+  transform: translateY(40px) scale(.97);
+  transition:
+    opacity  .75s cubic-bezier(.22,1,.36,1),
+    transform .75s cubic-bezier(.22,1,.36,1);
+  will-change: opacity, transform;
+}
+.card:nth-child(2) { transition-delay: .08s; }
+.card:nth-child(3) { transition-delay: .16s; }
+.card:nth-child(4) { transition-delay: .06s; }
+.card:nth-child(5) { transition-delay: .12s; }
+.card:nth-child(6) { transition-delay: .18s; }
+.card--in { opacity: 1; transform: translateY(0) scale(1); }
+
+/* ── Shell — strict 9:16 ── */
+.card-shell {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0c0c1a;
+  cursor: pointer;
+  outline: 1.5px solid rgba(255,255,255,.09);
+  transition:
+    transform  .5s cubic-bezier(.22,1,.36,1),
+    box-shadow .5s cubic-bezier(.22,1,.36,1),
+    outline-color .4s ease;
+  will-change: transform, box-shadow;
+}
+.card-shell--hov {
+  transform: scale(1.03) translateY(-6px);
+  outline-color: rgba(168,85,247,.5);
+  box-shadow:
+    0 28px 60px rgba(0,0,0,.9),
+    0  0  72px rgba(109,40,217,.28),
+    0  0   0 1px rgba(168,85,247,.3);
+}
+
+/* ── Iframe ── */
+.card-iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: none; z-index: 1;
+}
+
+/* ── Skeleton ── */
+.card-skeleton {
+  position: absolute; inset: 0; z-index: 1;
+  background: #0f0f20; overflow: hidden;
+}
+.card-shimmer {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255,255,255,.04) 50%,
+    transparent 65%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+@keyframes shimmer { from{background-position:200% 0} to{background-position:-200% 0} }
+
+/* ── Glow ring on hover ── */
+.card-ring {
+  position: absolute; inset: 0; border-radius: 18px;
+  z-index: 4; pointer-events: none;
+  box-shadow: inset 0 0 0 1.5px rgba(168,85,247,.65);
+  opacity: 0; transition: opacity .4s ease;
+}
+.card-shell--hov .card-ring { opacity: 1; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .port-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .port { padding: 40px 24px 56px; }
+}
+@media (max-width: 540px) {
+  .port-grid { grid-template-columns: 1fr; gap: 20px; }
+  .port { padding: 32px 16px 48px; }
+}
